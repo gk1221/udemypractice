@@ -1,0 +1,28 @@
+css in style == global 
+one component --> <style scoped> 限制只在此元件中，上下都不會被汙染
+vue add tailwind 
+tailwind.config.js 編寫個人CSS
+1.open sans定義在index.html
+2.tailwind.config.js-theme-extend-fontFamily-sans = open sans + default
+<MainNav></MainNav> = <MainNav /> = <main-nav></main-nav> = <main-nav />
+jest ---> test/unit/***.test.js
+npm run test:unit (define in package.json-script-test:unit)
+describe:test name, it:unit name, expect(測試內容).toBe(期待內容)
+describe - describe - it 
+import 'func name'  from 'js'   export const 'func name' 
+TDD -test driven develope test->codings test
+vue test :
+1.import {mount} from "@vue/test-utils"
+2....  const wrapper = mount(MainNav)
+3. wrapper.html()--html  wrapper.text()--輸出資料
+4.只須包含、某處有 -- expect(wrapper.text()).toMatch(data)
+2-1 const wrapper = mount(MainNav,{data(){}....}) mount第二個參數可丟data取代原vue元件data
+    不推，因TDD須以測試為基礎不應另外給予參數
+2-2 async()=> { ... await wrapper.setData({company:"Super Corp"})}
+
+
+
+
+
+
+

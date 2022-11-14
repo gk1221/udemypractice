@@ -37,3 +37,8 @@ export const Multiply = (n1, n2) => {
     return total;
 };
 */
+/*
+const num = [1, 2, 3, 4, 5];
+const square = num.map((num1) => num1 * 2);
+console.log(square);
+*/

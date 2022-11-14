@@ -10,14 +10,11 @@
 
         <nav class="h-full ml-12">
           <ul class="flex h-full p-0 m-0 list-none">
-            <li class="h-full">
-              <a href="" class="flex items-center h-full py-2.5">Teams</a>
-            </li>
-
             <li
-              class="h-full ml-9"
+              class="h-full ml-9 first:ml-0"
               v-for="menuItem in menuItems"
               :key="menuItem"
+              data-test="main-nav-list-item"
             >
               <a href="" class="flex items-center h-full py-2.5">{{
                 menuItem
@@ -25,20 +22,49 @@
             </li>
           </ul>
         </nav>
+
+        <div class="flex items-center h-full ml-auto">
+          <action-button
+            v-if="!isLoggedIn"
+            data-test="login-button"
+            @:click="loginUser"
+          />
+          <profile-image v-else data-test="profile-image" @:click="loginUser" />
+        </div>
       </div>
     </div>
   </header>
 </template>
 
 <script>
+import ActionButton from "@/components/ActionButton.vue";
+import ProfileImage from "@/components/ProfileImage.vue";
+
 export default {
   name: "MainNav", //for used name
+  components: {
+    ActionButton,
+    ProfileImage,
+  },
   data() {
     return {
       company: "NOW Careers",
       url: "https://careers.google.com",
-      menuItems: ["Locations", "Life at NOW", "Hire", "Students", "Jobs"],
+      menuItems: [
+        "Teams",
+        "Locations",
+        "Life at NOW",
+        "Hire",
+        "Students",
+        "Jobs",
+      ],
+      isLoggedIn: false,
     };
+  },
+  methods: {
+    loginUser() {
+      this.isLoggedIn = !this.isLoggedIn;
+    },
   },
 };
 </script>

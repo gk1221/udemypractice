@@ -32,8 +32,28 @@ login test
 1-1 ... const loginButton = wrapper.find("[data-test='login-button']");
 1-2 MainNav.vue- <action-button data-test="login-button" /> 避免元件重新命名時找不到
 click test
-1.async()=>{... await loginButton.trigger("click")} -->時間較長等待完成點擊動作
+1.async()=>{... await loginButton.trigger("click")} -->trigger() 非同步
 2.profileImage = wrapper.find("[data-test='profile-image']");-->重新獲取狀態
+props (reuse button in any place)
+1. child---> exports default{ props:["text"]}
+2. parent ---> <action-button text="Sign in">
+.css button{@apply px-5...} ---> use tailwind in html text
+html==:is-primary  vue.scripts==isPrimary
+html== type="primary" vue.scripts== props:["type"]  ButtonClass(){return [this.type]:true}-->(primary)
+type:{validator(value){return ["primary", "secondary"].includes(value)} --->驗證是否只有要求的內容
+acionButton--Camel case  action-button--Kebab case
+.eslint.js rules:"vue/multi-word-component-names": "off" 避免要求要多字元件
+fontawesome
+npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/vue-fontawesome@prerelease
+--> 為了在vue中以元件方式讀取
+main.js:  libary.import(fasearch)  createApp(App).component("font-awesome-icon", FontAwesomeIcon) --只載入需要的svg
+
+
+
+
+
+
+
 
 
 

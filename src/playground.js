@@ -42,14 +42,3 @@ const num = [1, 2, 3, 4, 5];
 const square = num.map((num1) => num1 * 2);
 console.log(square);
 */
-
-/*
-const intervla = setInterval(()=> {
-    console.log("2 seconds")
-}, 2000)
-
-setTimeout(() => {
-    clearInterval(intervla)
-}, 10000)
-
-*/

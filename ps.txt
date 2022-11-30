@@ -47,16 +47,11 @@ fontawesome
 npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/vue-fontawesome@prerelease
 --> 為了在vue中以元件方式讀取
 main.js:  libary.import(fasearch)  createApp(App).component("font-awesome-icon", FontAwesomeIcon) --只載入需要的svg
-mount-->產生元件後子元件也會產生，造成子元件資料沒輸入會測試失敗 -->shallowMount只產生該元件不要產生所有的子元件
-test.js: global:{stubs:{FAI:true}} --> <div>...</div><FAI></FAI> 避免不需要測試的指定子層元件FAI被mount
-mainnav shallowmount profileImage不會被測試 -->add profileImage.test.js
-hero --> mainpage 內容
-header沒有height class ，hero被擋住-->headerClassheight(){h-16, h-32}
-.js export default {funcname} --> .vue import {func} from 
-test component use fake func --> jest.fn()
-jest.useFakeTimers("legacy") --> 取代時間函數setInterval避免時間真的進入，結束後jest.useRealTimer()
-jest.runOnlyPendingTimers() --> 進入時間函數但跳過時間
-測試下一時間狀態 --> await nextTick() 經過時間後確認vue model data真的被更新
+
+
+
+
+
 
 
 

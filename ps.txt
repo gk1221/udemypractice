@@ -48,7 +48,7 @@ npm install --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg
 --> 為了在vue中以元件方式讀取
 main.js:  libary.import(fasearch)  createApp(App).component("font-awesome-icon", FontAwesomeIcon) --只載入需要的svg
 mount-->產生元件後子元件也會產生，造成子元件資料沒輸入會測試失敗 -->shallowMount只產生該元件不要產生所有的子元件
-test.js: global:{stubs:{FAI:true}} --> <div>...</div><FAI></FAI> 避免不需要測試的指定子層元件FAI被mount
+test.js: global:{stubs:{FAI:true} } --> <div>...</div><FAI></FAI> 避免不需要測試的指定子層元件FAI被mount
 mainnav shallowmount profileImage不會被測試 -->add profileImage.test.js
 hero --> mainpage 內容
 header沒有height class ，hero被擋住-->headerClassheight(){h-16, h-32}
@@ -59,6 +59,41 @@ jest.runOnlyPendingTimers() --> 進入時間函數但跳過時間
 測試下一時間狀態 --> await nextTick() 經過時間後確認vue model data真的被更新
 .test.js beforeEach、afterEach 每個測試之前/之後做的事情
 input bind: 1.updateRole(event){this.role=event.target.value}  2.@input="updateRole" ;;  @input="location = $event.target.value"
+v-model =  "variable name" --> 綁定變數間行為
+this.$emit("event name", event value) --> 向上傳遞資料
+@event-name="role= $event" --> 在元件中對由子元素接收傳過來的資料($event)做動作
+1. parent :value="role" --> 向子元素props變數
+2. child props{value} --> 宣告接收子元素
+3. child :value="value" -->輸入文字框中雙向綁定傳進來的本地value變數
+4. child @input this.$emit("handleInput", $event.target.value) --> 將輸入的資料以handleInput的名字向上去傳遞
+5. parent @handle-input="role = $event" -->父元件從handle-input事件中得到值，並將值送入本地role
+test for input box ---> 1. const input = screen.getbyrole("textbox") 從螢幕抓取textbox
+    2. await userEvent.type(input, "NYC") 模仿輸入NYC的過程 --> 產生 [['N'], ['NY'], ['NYC']] 
+    3. const message = emitted()["update:modelValue"] 類似emit update:modelValue
+    4. expect(message).toEqual([['N'], ['NY'], ['NYC']]) 
+
+this.$route --- show route information
+:to={name:'Home'} === to="/"
+as :51  ==> stub:{RouterLink: RouterLinkStub,} 做個router-link的填充物
+thesubna.test.js const $route --> 給一個目前route的名稱測試
+global:{mocks{$route}} 以自訂物件的方式的方式給全域變數$route內容
+route path:"jobs/results/:id" 以url id傳進$route當中 ---> JobView.vue this.$route.params.id來接
+form @submit.prevent="method" 避免整頁送出的submit刑式 用提供的method的形式對vue送出router參數跟目標
+jobsearchform.test.js 1.push = vi.fn() 模仿一個函數動作給 $router
+                2.mocks {$router:$router} 模仿送出後給router的push
+                3.screen.getbyrole(元素,名稱) <-- userEvent.type 待輸入後送入
+                4.expect(push).toHaveBeenCalled 期望route push後送出的東西包含role跟location中的值
+
+
+
+
+
+
+
+
+
+
+
 
 
 

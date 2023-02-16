@@ -4,20 +4,25 @@
       <div
         class="mx-auto flex h-full flex-nowrap border-b border-solid border-brand-gray-1 px-8"
       >
-        <a :href="url" class="flex h-full items-center text-xl">{{
-          company
-        }}</a>
+        <router-link
+          :to="{ name: 'Home' }"
+          class="flex h-full items-center text-xl"
+        >
+          Now Careers
+        </router-link>
 
         <nav class="ml-12 h-full">
           <ul class="flex h-full list-none">
             <li
               v-for="menuItem in menuItems"
-              :key="menuItem"
+              :key="menuItem.text"
               class="ml-9 h-full first:ml-0"
             >
-              <a href="" class="flex h-full items-center py-2.5">{{
-                menuItem
-              }}</a>
+              <router-link
+                :to="menuItem.url"
+                class="flex h-full items-center py-2.5"
+                >{{ menuItem.text }}</router-link
+              >
             </li>
           </ul>
         </nav>
@@ -34,9 +39,9 @@
 </template>
 
 <script>
-import ActionButton from "@/components/ActionButton.vue";
-import ProfileImage from "@/components/ProfileImage.vue";
-import TheSubnav from "@/components/TheSubnav.vue";
+import ActionButton from "@/components/Shared/ActionButton.vue";
+import ProfileImage from "@/components/Navigation/ProfileImage.vue";
+import TheSubnav from "@/components/Navigation/TheSubnav.vue";
 
 export default {
   name: "MainNav",
@@ -47,15 +52,13 @@ export default {
   },
   data() {
     return {
-      company: "Bobo Careers",
-      url: "https://careers.google.com",
       menuItems: [
-        "Teams",
-        "Locations",
-        "Life at Bobo Corp",
-        "How we hire",
-        "Students",
-        "Jobs",
+        { text: "Teams", url: "/" },
+        { text: "Locations", url: "/" },
+        { text: "Life at Bobo Corp", url: "/" },
+        { text: "How we hire", url: "/" },
+        { text: "Students", url: "/" },
+        { text: "Jobs", url: "/jobs/results" },
       ],
       isLoggedIn: false,
     };

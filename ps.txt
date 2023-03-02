@@ -83,9 +83,7 @@ jobsearchform.test.js 1.push = vi.fn() 模仿一個函數動作給 $router
                 2.mocks {$router:$router} 模仿送出後給router的push
                 3.screen.getbyrole(元素,名稱) <-- userEvent.type 待輸入後送入
                 4.expect(push).toHaveBeenCalled 期望route push後送出的東西包含role跟location中的值
-
-
-
+package.js中增加"backend": "json-server --watch  db.json" ::確保npm會在更動時重新仔入
 
 
 

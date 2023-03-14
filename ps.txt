@@ -88,8 +88,8 @@ npm run backend --> 啟動json server
  
 
 getbyrole for sync <--> findbyrole for async
-
-
+personal token:: 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
+url :: https://gk1221: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@github.com/gk1221/udemypractice.git
 
 
 

@@ -61,7 +61,6 @@ export default {
   },
   computed: {
     jobPageLink() {
-      console.log(this.job);
       return `/jobs/results/${this.job.id}`;
     },
   },

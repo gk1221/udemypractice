@@ -91,6 +91,52 @@ getbyrole for sync <--> findbyrole for async
 personal token:: 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
 url :: https://gk1221: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@github.com/gk1221/udemypractice.git
 
+development --> hot module reloading
+production --> reduce file size to
+
+.env.development.local --> VITE_APP_API_URL = http://localhost:3000
+取用 const baseUrl = import.meta.env.VITE_APP_API_URL;
+    const response = await axios.get(`${baseUrl}/jobs`);
+.env.test 、 .env.production 提供給產品及測試使用的全域變數
+
+pinia 存儲state across components
+export const useUserStore = defineStore("user" : 給個儲存庫一個新的ID
+const pinia = createPinia();
+import { mapStores } from "pinia";
+...mapStores(useUserStore), //userStore ::展開store即可取用
+...mapActions(useUserStore, ["loginUser"]), :: 使用陣列的方式呼叫pinia當中的function name
+this.userStore ...
+
+setActivePinia(createPinia()) :: 在測試當中啟用pinia儲存
+store.isLoggedIn :: user.js state export
+1. 假的pinia儲存庫
+ const pinia = createTestingPinia({ stubActions: false }); plugins: [pinia],
+2. 使用真正的store const userStore = useUserStore() :: 不建議，存取到真正的store
+
+vi.mock("axios") :: 假axios發出假的request
+mockResolvedValue :: 假的傳回資料
+createTestingPinia :: global pinia instance的state、actions由mock functions 
+
+export const FETCH_JOBS = "FETCH_JOBS"; :: 輸出FETCH_JOBS為一個字串(#107的替代方法)
+async [FETCH_JOBS]() {...}
+...mapActions(useJobsStore, [FETCH_JOBS]), 對api fetchjob 並放入state
+
+...mapState(useJobsStore, {
+      jobs: "jobs", --> 使用這個jobs的computed必須放入底下
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

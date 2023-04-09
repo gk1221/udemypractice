@@ -124,10 +124,14 @@ async [FETCH_JOBS]() {...}
 ...mapState(useJobsStore, {
       jobs: "jobs", --> 使用這個jobs的computed必須放入底下
 
+props pass js object<--> slot pass html
+child:<slot /> parent可放入html至該位置:<child>html</child>
+test.js render-slot-> default:default text
+<slot>default text</slot> --> 使用時無輸入時會輸出預設文字 :: fallback default content
+div 作為點擊展開 -> testfile screen.getByRole("button", ...) -> 失敗::<div role="button">
+<slot name="title"> -> <component> <template v-slot:slotname>HTML</template></component> ::賽入指定的slot
 
-
-
-
+<slot> -> <template v-slot:default></template>
 
 
 

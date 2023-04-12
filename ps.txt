@@ -130,14 +130,23 @@ test.js render-slot-> default:default text
 <slot>default text</slot> --> 使用時無輸入時會輸出預設文字 :: fallback default content
 div 作為點擊展開 -> testfile screen.getByRole("button", ...) -> 失敗::<div role="button">
 <slot name="title"> -> <component> <template v-slot:slotname>HTML</template></component> ::賽入指定的slot
-
+==> <template #slotname>HTML</template>
 <slot> -> <template v-slot:default></template>
 
+slot props、scoped slots
+<v-for><slot :objname:obj ></v-for> 用for做出多個slot 使用的物件名稱
+<template #default:"slotprops"> 預設的物件內容
+取用物件 ==>slotProps.spotlight.name
+另 :: <slot :img.. :title.. :description..> ==>> <template #default:"slotprops"> slotprops.img....  
+    slot提供預設props，模板當中從預設slotprops當中取用物件
+另 <template #default:{img , title, description}> img....
+    scoped slots裡使用限定的物件
 
+.js getters:: runs when state changes
+v-model:data :value:checkbox ::將選取的資料放入、綁定進入data
 
-
-
-
+user.js stores ADD_SELECTED_ORGANIZATIONS() in state.selectedorganizations
+job.js filter FILTERED_JOBS_BY_ORGANIZATIONS() useUserStore > userStore.selectedOrganizations.includes(job.organization) 
 
 
 

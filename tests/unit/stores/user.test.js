@@ -9,13 +9,17 @@ describe("state", () => {
 
   it("keeps track of if user is logged in ", () => {
     const store = useUserStore();
-
     expect(store.isLoggedIn).toBe(false);
   });
 
   it("stores organization user filter", () => {
     const store = useUserStore();
     expect(store.selectedOrganizations).toEqual([]);
+  });
+
+  it("stores job types that the user would like to filter jobs by", () => {
+    const store = useUserStore();
+    expect(store.selectedJobTypes).toEqual([]);
   });
 });
 
@@ -37,6 +41,14 @@ describe("actions", () => {
       const store = useUserStore();
       store.ADD_SELECTED_ORGANIZATIONS(["Org1", "Org2"]);
       expect(store.selectedOrganizations).toEqual(["Org1", "Org2"]);
+    });
+  });
+
+  describe("ADD_SELECTED_JOB_TYPES", () => {
+    it("updates job types the user has chosen to filter jobs by", () => {
+      const store = useUserStore();
+      store.ADD_SELECTED_JOB_TYPES(["Full-time", "Part-time"]);
+      expect(store.selectedJobTypes).toEqual(["Full-time", "Part-time"]);
     });
   });
 });

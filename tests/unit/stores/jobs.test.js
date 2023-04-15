@@ -49,6 +49,20 @@ describe("getter", () => {
     });
   });
 
+  describe("UNIQUE_JOB_TYPES", () => {
+    it("finds unique job types from list of jobs", () => {
+      const store = useJobsStore();
+      store.jobs = [
+        { jobType: "Full-time" },
+        { jobType: "Temporary" },
+        { jobType: "Full-time" },
+      ];
+
+      const result = store.UNIQUE_JOB_TYPES;
+      expect(result).toEqual(new Set(["Full-time", "Temporary"]));
+    });
+  });
+
   describe("FILTERED_JOBS_BY_ORGANIZATIONS", () => {
     it("identifies jobs that are associated with the given organizations", () => {
       const jobsStore = useJobsStore();
@@ -66,6 +80,62 @@ describe("getter", () => {
         { organization: "Google" },
         { organization: "Microsoft" },
       ]);
+    });
+
+    describe("when the user has not selected any or", () => {
+      it("returns all jobs", () => {
+        const jobsStore = useJobsStore();
+        jobsStore.jobs = [
+          { organization: "Google" },
+          { organization: "Amazon" },
+          { organization: "Microsoft" },
+        ];
+        const userStore = useUserStore();
+        userStore.selectedOrganizations = [];
+
+        const result = jobsStore.FILTERED_JOBS_BY_ORGANIZATIONS;
+        expect(result).toEqual([
+          { organization: "Google" },
+          { organization: "Amazon" },
+          { organization: "Microsoft" },
+        ]);
+      });
+    });
+  });
+
+  describe("FILTERED_JOBS_BY_JOB_TYPES", () => {
+    it("identifies jobs that are associated with the given jbt", () => {
+      const jobsStore = useJobsStore();
+      jobsStore.jobs = [
+        { jobType: "Full-time" },
+        { jobType: "Temporary" },
+        { jobType: "Full-time" },
+      ];
+
+      const userStore = useUserStore();
+      userStore.selectedJobTypes = ["Full-time", "Temporary"];
+
+      const result = jobsStore.FILTERED_JOBS_BY_JOB_TYPES;
+      expect(result).toEqual([
+        { jobType: "Full-time" },
+        { jobType: "Temporary" },
+      ]);
+    });
+
+    describe("when the user has not selected any jbt", () => {
+      it("returns all jobs", () => {
+        const userStore = useUserStore();
+        userStore.selectedJobTypes = [];
+        const jobsStore = useJobsStore();
+        jobsStore.jobs = [{ jobType: "Full-time" }, { jobType: "Temporary" }];
+
+        const result = jobsStore.FILTERED_JOBS_BY_JOB_TYPES;
+        console.log(result);
+        expect(result).toEqual([
+          { jobType: "Full-time" },
+          { jobType: "Temporary" },
+        ]);
+      });
     });
   });
 });

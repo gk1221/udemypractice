@@ -142,13 +142,15 @@ slot props、scoped slots
 另 <template #default:{img , title, description}> img....
     scoped slots裡使用限定的物件
 
-.js getters:: runs when state changes
+.js getters:: pinia store runs when state changes
 v-model:data :value:checkbox ::將選取的資料放入、綁定進入data
 
 user.js stores ADD_SELECTED_ORGANIZATIONS() in state.selectedorganizations
 job.js filter FILTERED_JOBS_BY_ORGANIZATIONS() useUserStore > userStore.selectedOrganizations.includes(job.organization) 
 
-
+const pinia = createTestingPinia(); -> render(global:{plugins:[pinia]}) 啟用pinia fake stores
+const store = useJobsStore();
+      store.jobs = [{ organization: "Google" }...]; use simple object than actual store
 
 
 

@@ -26,7 +26,7 @@ describe("JobFiltersSidebarOrganizations", () => {
   };
   it("renders unique list of organizations from jobs", async () => {
     const { jobsStore } = renderJobFiltersSidebarOrganizations();
-    jobsStore.UNIQUE_ORGANIZATIONS = new Set(["Google", "Amazon"]);
+ 
 
     const button = screen.getByRole("button", { name: /organizations/i });
     await userEvent.click(button);
@@ -38,7 +38,7 @@ describe("JobFiltersSidebarOrganizations", () => {
 
   it("communicates that user has checked the box", async () => {
     const { jobsStore, userStore } = renderJobFiltersSidebarOrganizations();
-    jobsStore.UNIQUE_ORGANIZATIONS = new Set(["Google", "Microsoft"]);
+
 
     const button = screen.getByRole("button", { name: /organizations/i });
     await userEvent.click(button);

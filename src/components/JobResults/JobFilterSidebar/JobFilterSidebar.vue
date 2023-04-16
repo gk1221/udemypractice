@@ -11,9 +11,10 @@
       </div>
       <Collapsible-acrrordion header="Degree" />
 
-      <Collapsible-acrrordion header="Job types">
+      <Collapsible-acrrordion header="Function">
         <p>Placeholde place here</p></Collapsible-acrrordion
       >
+      <JobFiltersSidebarJobTypes />
       <JobFiltersSidebarOrganization />
     </section>
   </div>
@@ -23,6 +24,7 @@
 import ActionButton from "@/components/Shared/ActionButton.vue";
 import CollapsibleAcrrordion from "@/components/Shared/CollapsibleAcrrordion.vue";
 import JobFiltersSidebarOrganization from "@/components/JobResults/JobFilterSidebar/JobFiltersSidebarOrganization.vue";
+import JobFiltersSidebarJobTypes from "@/components/JobResults/JobFilterSidebar/JobFiltersSidebarJobTypes.vue";
 
 export default {
   name: "JobFilterSidebar",
@@ -30,6 +32,7 @@ export default {
     ActionButton,
     CollapsibleAcrrordion,
     JobFiltersSidebarOrganization,
+    JobFiltersSidebarJobTypes
   },
 };
 </script>

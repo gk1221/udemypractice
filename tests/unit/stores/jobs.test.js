@@ -109,7 +109,7 @@ describe("getter", () => {
       jobsStore.jobs = [
         { jobType: "Full-time" },
         { jobType: "Temporary" },
-        { jobType: "Full-time" },
+        { jobType: "part-time" },
       ];
 
       const userStore = useUserStore();

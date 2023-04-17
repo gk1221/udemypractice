@@ -152,10 +152,13 @@ const pinia = createTestingPinia(); -> render(global:{plugins:[pinia]}) 啟用pi
 const store = useJobsStore();
       store.jobs = [{ organization: "Google" }...]; use simple object than actual store
 
+noselected => filter(return true) 不返回其他結果
+const $router = { push: vi.fn() }; mocks:{$router}; expect($router.push()).toHaveBeenCalledWith({name:...}) ==> 用fakefunction呼叫router push最後被指向Jobresults
 
-
-
-
+use getter in getter
+ [INCLUDE_JOB_BY_ORGANIZATION]: () => (job) => {...} ====> return a function 為了更簡潔函式裡的寫法，空箭頭表達他為返回一個函式
+click the redirect to results
+    @change :: this.$router.push({name:"JobResults"})
 
 
 

@@ -61,11 +61,18 @@ export const useJobsStore = defineStore("jobs", {
       const noSelectedOrganizations =
         userStore.selectedOrganizations.length === 0;
       const noSelectedJobTypes = userStore.selectedJobTypes.length === 0;
-      if(noSelectedOrganizations && noSelectedJobTypes) return state.jobs
-      return state.jobs.filter((job)=>{
-        userStore.selectedOrganizations.includes(job.organization)
-      }).filter((job)=> userStore.selectedJobTypes.includes(job.jobType))
 
+      if (noSelectedOrganizations && noSelectedJobTypes) return state.jobs;
+
+      return state.jobs
+        .filter((job) => {
+          if (noSelectedOrganizations) return true;
+          return userStore.selectedOrganizations.includes(job.organization);
+        })
+        .filter((job) => {
+          if (noSelectedJobTypes) return true;
+          return userStore.selectedJobTypes.includes(job.jobType);
+        });
     },
   },
 });

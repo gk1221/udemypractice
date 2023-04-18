@@ -161,7 +161,8 @@ click the redirect to results
     @change :: this.$router.push({name:"JobResults"})
 
 const{ref} = require("vue") let a =ref(1) c==>reactive 
-IN VUE:: computed(()=> a.value + b.value)
+IN VUE:: computed(()=> a.value + b.value) 
+object :: obj.value + b.value...
 
 
 

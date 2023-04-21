@@ -14,25 +14,33 @@
       <Collapsible-acrrordion header="Function">
         <p>Placeholde place here</p></Collapsible-acrrordion
       >
-      <JobFiltersSidebarJobTypes />
-      <JobFiltersSidebarOrganization />
+      <job-filters-sidebar-checkbox-group
+        header="Job Types"
+        :unique-values="UNIQUE_JOB_TYPES"
+        :action="userStore.ADD_SELECTED_JOB_TYPES"
+      />
+      <job-filters-sidebar-checkbox-group
+        header="Organizations"
+        :unique-values="UNIQUE_ORGANIZATIONS"
+        :action="userStore.ADD_SELECTED_ORGANIZATIONS"
+      />
     </section>
   </div>
 </template>
 
-<script>
+<script setup>
+import { computed } from "vue";
+
 import ActionButton from "@/components/Shared/ActionButton.vue";
 import CollapsibleAcrrordion from "@/components/Shared/CollapsibleAcrrordion.vue";
-import JobFiltersSidebarOrganization from "@/components/JobResults/JobFilterSidebar/JobFiltersSidebarOrganization.vue";
-import JobFiltersSidebarJobTypes from "@/components/JobResults/JobFilterSidebar/JobFiltersSidebarJobTypes.vue";
+import JobFiltersSidebarCheckboxGroup from "@/components/JobResults/JobFilterSidebar/JobFiltersSidebarCheckboxGroup.vue";
 
-export default {
-  name: "JobFilterSidebar",
-  components: {
-    ActionButton,
-    CollapsibleAcrrordion,
-    JobFiltersSidebarOrganization,
-    JobFiltersSidebarJobTypes
-  },
-};
+import { useJobsStore } from "@/stores/jobs";
+import { useUserStore } from "@/stores/user";
+
+const jobsStore = useJobsStore();
+const UNIQUE_ORGANIZATIONS = computed(() => jobsStore.UNIQUE_ORGANIZATIONS);
+const UNIQUE_JOB_TYPES = computed(() => jobsStore.UNIQUE_JOB_TYPES);
+
+const userStore = useUserStore();
 </script>

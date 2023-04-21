@@ -163,6 +163,21 @@ click the redirect to results
 const{ref} = require("vue") let a =ref(1) c==>reactive 
 IN VUE:: computed(()=> a.value + b.value) 
 object :: obj.value + b.value...
+ reactive({name:"BOR"}) -> person.name :: 仍有reactive
+const firstName = toRef(person, "firstName") -> reactive object on a object
+    firstName.value...
+    OR :: const {firstName, lastname} = toRefs(person) --> reactive object
 
-
-
+composition API :: 解決不清晰的数据来源(data scope:this、$...)、易維護性能够覆盖所有状态逻辑方面的需求(props、emit、name)、typescript
+setup(){ ... return {...}} --> return 出來的東西為要在html render的東西ex:data、method..
+import {computed, vue} from "vue" ;const caretIcon = computed()....
+setup(props){props.type...} --> 取用props過來的物件需放進
+Another write:: <script setup> 將setup放入script當中
+    const props = definprops({object}) --> 使用props
+    不需要return 物件 --> const obj 直接return
+const FILTERED_JOBS = computed(() => jobsStore.FILTERED_JOBS); 
+    ---> 來自pinia的物件中 要return一個物件所以使用computed
+import { useRouter } from "vue-router"; const router = useRouter(); router.push({})
+useRoute.mockReturnValue({ name: "Home" }); ---> 取代test當中 route.name = "Home" #79
+import{onMounted} onMounted(getSpotlights); --> 使用onMounted並放入已寫好的async
+原 ...mapAction(sotre, [functionname]) -----> const store = useJobsStore() store.funct

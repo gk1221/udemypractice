@@ -181,3 +181,14 @@ import { useRouter } from "vue-router"; const router = useRouter(); router.push(
 useRoute.mockReturnValue({ name: "Home" }); ---> 取代test當中 route.name = "Home" #79
 import{onMounted} onMounted(getSpotlights); --> 使用onMounted並放入已寫好的async
 原 ...mapAction(sotre, [functionname]) -----> const store = useJobsStore() store.funct
+
+Typescripts
+type literal :: const name = true(type: const name:true) true為他的文字型別，通常為const 不可改變的變數
+const name:"name" = "dww" :: error 因已給定type "name"
+let obj:{name:string, skill?:number} :: skill is a option property
+type interface = {name:"string"..w}; const obj :interface={} :: 共用一個type
+
+
+
+
+

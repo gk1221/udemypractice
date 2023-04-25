@@ -1,5 +1,5 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "tests/**/*"],
   "exclude": [],
   "compilerOptions": {
@@ -11,4 +11,3 @@
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   }
 }
-

@@ -8,8 +8,6 @@
 </template>
 
 <script lang="ts" setup>
-import { DefineComponent, defineComponent } from "vue";
-
 defineProps({
   modelValue: {
     type: String,

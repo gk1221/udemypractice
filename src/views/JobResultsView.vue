@@ -5,22 +5,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts" setup>
 import JobFilterSidebar from "@/components/JobResults/JobFilterSidebar/JobFilterSidebar.vue";
 import JobListings from "@/components/JobResults/JobListings.vue";
-
-export default {
-  name: "JobResultsView",
-
-  components: {
-    JobFilterSidebar,
-    JobListings,
-  },
-
-  methods: {
-    goToHome() {
-      this.$router.push({ name: "Home" });
-    },
-  },
-};
 </script>

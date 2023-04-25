@@ -17,3 +17,4 @@ module.exports = {
     "vitest-globals/env": true,
   },
 };
+

@@ -27,7 +27,7 @@
   </form>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import ActionButton from "@/components/Shared/ActionButton.vue";
@@ -44,23 +44,4 @@ const searchForJobs = () => {
     query: { role: role.value, location: location.value },
   });
 };
-
-// export default {
-//   name: "JobSearchForm",
-//   components: { ActionButton, TextInput },
-//   data() {
-//     return {
-//       role: "",
-//       location: "",
-//     };
-//   },
-//   methods: {
-//     searchForJobs() {
-//       this.$router.push({
-//         name: "JobResults",
-//
-//       });
-//     },
-//   },
-// };
 </script>

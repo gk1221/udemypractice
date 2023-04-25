@@ -30,7 +30,7 @@
   </main>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import JobListing from "@/components/JobResults/JobListing.vue";
@@ -43,7 +43,9 @@ onMounted(jobsStore.FETCH_JOBS);
 const FILTERED_JOBS = computed(() => jobsStore.FILTERED_JOBS);
 
 const route = useRoute();
-const currentPage = computed(() => Number.parseInt(route.query.page || "1"));
+const currentPage = computed(() =>
+  Number.parseInt((route.query.page as string) || "1")
+);
 const maxPage = computed(() => Math.ceil(FILTERED_JOBS.value.length / 10));
 
 const { previousPage, nextPage } = usePreviousAndNextPages(
@@ -52,8 +54,8 @@ const { previousPage, nextPage } = usePreviousAndNextPages(
 );
 
 const displayedJobs = computed(() => {
-  const pageString = currentPage.value;
-  const pageNumber = Number.parseInt(pageString);
+  const pageNumber = currentPage.value;
+
   const firstJobIndex = (pageNumber - 1) * 10;
   const lastJobIndex = pageNumber * 10;
   return FILTERED_JOBS.value.slice(firstJobIndex, lastJobIndex);

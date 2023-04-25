@@ -1,12 +1,11 @@
 import type { Mock } from "vitest";
 import { createPinia, setActivePinia } from "pinia";
 import axios from "axios";
-import type { Job } from "@/api/types";
 
 import { vi } from "vitest";
 import { useJobsStore } from "@/stores/jobs";
 import { useUserStore } from "@/stores/user";
-
+import { createJob } from "../../utils/createJob";
 vi.mock("axios");
 const axiosGetMock = axios.get as Mock;
 
@@ -37,26 +36,6 @@ describe("actions", () => {
 });
 
 describe("getter", () => {
-  const createJob = (job: Partial<Job> = {}): Job => ({
-    id: 1,
-    title: "Angular Developer",
-    organization: "Vue and Me",
-    degree: "Master's",
-    jobType: "Intern",
-    locations: ["Lisbon"],
-    minimumQualifications: [
-      "Mesh granular deliverables, engineer enterprise convergence, and synergize B2C initiatives",
-      "Morph bricks-and-clicks relationships, whiteboard one-to-one experiences, and innovate distributed schemas",
-      "Drive intuitive deliverables, exploit vertical users, and optimize interactive e-commerce",
-      "Embrace sticky infrastructures, incubate B2C portals, and drive killer applications",
-    ],
-    preferredQualifications: [
-      "Mesh wireless metrics, syndicate innovative markets, and disintermediate intuitive niches",
-    ],
-    description: ["Away someone forget effect wait land."],
-    dateAdded: "2021-07-04",
-    ...job,
-  });
   beforeEach(() => {
     setActivePinia(createPinia());
   });
@@ -81,7 +60,7 @@ describe("getter", () => {
         createJob({ jobType: "Full-time" }),
         createJob({ jobType: "Temporary" }),
         createJob({ jobType: "Full-time" }),
-      ] as Job[];
+      ];
 
       const result = store.UNIQUE_JOB_TYPES;
       expect(result).toEqual(new Set(["Full-time", "Temporary"]));

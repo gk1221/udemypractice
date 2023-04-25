@@ -20,7 +20,7 @@
   </Collapsible-acrrordion>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
@@ -32,7 +32,7 @@ const props = defineProps({
     required: true,
   },
   uniqueValues: {
-    type: Set,
+    type: Set<string>,
     required: true,
   },
   action: {
@@ -41,31 +41,11 @@ const props = defineProps({
   },
 });
 
-const selectedValues = ref([]);
+const selectedValues = ref<string[]>([]);
 const router = useRouter();
 
 const selectedValue = () => {
   props.action(selectedValues.value);
   router.push({ name: "JobResults" });
 };
-
-// export default {
-//   name: "JobFiltersSidebarJobTypes",
-//   components: { CollapsibleAcrrordion },
-//   data() {
-//     return {
-//       selectedJobTypes: [],
-//     };
-//   },
-//   computed: {
-//     ...mapState(useJobsStore, [UNIQUE_JOB_TYPES]),
-//   },
-//   methods: {
-//     ...mapActions(useUserStore, [ADD_SELECTED_JOB_TYPES]),
-//     selectedjobTypes() {
-//       this.ADD_SELECTED_JOB_TYPES(this.selectedJobTypes);
-//       this.$router.push({ name: "JobResults" });
-//     },
-//   },
-// };
 </script>

@@ -37,7 +37,7 @@ export const useJobsStore = defineStore("jobs", {
     },
 
     [UNIQUE_JOB_TYPES](state) {
-      const uniqueJobType = new Set();
+      const uniqueJobType = new Set<string>();
       state.jobs.forEach((job) => uniqueJobType.add(job.jobType));
       return uniqueJobType;
     },

@@ -199,7 +199,7 @@ usePreviousAndNextPages = (
 ) ---> 針對currentpage 跟max做type限制為一個Ref物件 type Ref<T>
 defineEmits(["update:modelValue"]); emit("update:modelValue", target.value);
 // @ts-expect-error ---> 下行ERROR可忽略
-
+Object as PropType<Job> --> 指定物件的type 為某一interface Job
 
 
 

@@ -1,10 +1,15 @@
+import type { Mock } from "vitest";
 import { createPinia, setActivePinia } from "pinia";
 import axios from "axios";
+import type { Job } from "@/api/types";
+
 import { vi } from "vitest";
 import { useJobsStore } from "@/stores/jobs";
 import { useUserStore } from "@/stores/user";
 
 vi.mock("axios");
+const axiosGetMock = axios.get as Mock;
+
 describe("state", () => {
   beforeEach(() => {
     setActivePinia(createPinia());
@@ -23,7 +28,7 @@ describe("actions", () => {
 
   describe("FETCH_JOBS", () => {
     it("makes API request and stores received jobs", async () => {
-      axios.get.mockResolvedValue({ data: ["JOB 1", "JOB 2"] });
+      axiosGetMock.mockResolvedValue({ data: ["JOB 1", "JOB 2"] });
       const store = useJobsStore();
       await store.FETCH_JOBS();
       expect(store.jobs).toEqual(["JOB 1", "JOB 2"]);
@@ -32,6 +37,26 @@ describe("actions", () => {
 });
 
 describe("getter", () => {
+  const createJob = (job: Partial<Job> = {}): Job => ({
+    id: 1,
+    title: "Angular Developer",
+    organization: "Vue and Me",
+    degree: "Master's",
+    jobType: "Intern",
+    locations: ["Lisbon"],
+    minimumQualifications: [
+      "Mesh granular deliverables, engineer enterprise convergence, and synergize B2C initiatives",
+      "Morph bricks-and-clicks relationships, whiteboard one-to-one experiences, and innovate distributed schemas",
+      "Drive intuitive deliverables, exploit vertical users, and optimize interactive e-commerce",
+      "Embrace sticky infrastructures, incubate B2C portals, and drive killer applications",
+    ],
+    preferredQualifications: [
+      "Mesh wireless metrics, syndicate innovative markets, and disintermediate intuitive niches",
+    ],
+    description: ["Away someone forget effect wait land."],
+    dateAdded: "2021-07-04",
+    ...job,
+  });
   beforeEach(() => {
     setActivePinia(createPinia());
   });
@@ -39,9 +64,9 @@ describe("getter", () => {
     it("finds unique orgainizations from list of jobs", () => {
       const store = useJobsStore();
       store.jobs = [
-        { organization: "Google" },
-        { organization: "Amazon" },
-        { organization: "Google" },
+        createJob({ organization: "Google" }),
+        createJob({ organization: "Amazon" }),
+        createJob({ organization: "Google" }),
       ];
 
       const result = store.UNIQUE_ORGANIZATIONS;
@@ -53,10 +78,10 @@ describe("getter", () => {
     it("finds unique job types from list of jobs", () => {
       const store = useJobsStore();
       store.jobs = [
-        { jobType: "Full-time" },
-        { jobType: "Temporary" },
-        { jobType: "Full-time" },
-      ];
+        createJob({ jobType: "Full-time" }),
+        createJob({ jobType: "Temporary" }),
+        createJob({ jobType: "Full-time" }),
+      ] as Job[];
 
       const result = store.UNIQUE_JOB_TYPES;
       expect(result).toEqual(new Set(["Full-time", "Temporary"]));
@@ -69,7 +94,7 @@ describe("getter", () => {
         const userStore = useUserStore();
         userStore.selectedOrganizations = [];
         const store = useJobsStore();
-        const job = { organization: "Google" };
+        const job = createJob({ organization: "Google" });
 
         const result = store.INCLUDE_JOB_BY_ORGANIZATION(job);
         expect(result).toBe(true);
@@ -79,7 +104,7 @@ describe("getter", () => {
         const userStore = useUserStore();
         userStore.selectedOrganizations = ["Google", "Microsoft"];
         const store = useJobsStore();
-        const job = { organization: "Google" };
+        const job = createJob({ organization: "Google" });
         const result = store.INCLUDE_JOB_BY_ORGANIZATION(job);
         expect(result).toBe(true);
       });
@@ -92,7 +117,7 @@ describe("getter", () => {
         const userStore = useUserStore();
         userStore.selectedJobTypes = [];
         const store = useJobsStore();
-        const job = { jobType: "Full-time" };
+        const job = createJob({ jobType: "Full-time" });
 
         const result = store.INCLUDE_JOB_BY_JOB_TYPE(job);
         expect(result).toBe(true);
@@ -102,7 +127,7 @@ describe("getter", () => {
         const userStore = useUserStore();
         userStore.selectedJobTypes = ["Full-time", "part-time"];
         const store = useJobsStore();
-        const job = { jobType: "Full-time" };
+        const job = createJob({ jobType: "Full-time" });
         const result = store.INCLUDE_JOB_BY_JOB_TYPE(job);
         expect(result).toBe(true);
       });

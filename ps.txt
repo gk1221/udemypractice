@@ -188,6 +188,25 @@ const name:"name" = "dww" :: error 因已給定type "name"
 let obj:{name:string, skill?:number} :: skill is a option property
 type interface = {name:"string"..w}; const obj :interface={} :: 共用一個type
 
+typescript沒有vi.mock --> import type { Mock } from "vitest";
+    vi.mock("axios");const c = axios.get as Mock
+test file job = {organization: ""}--> error 因為Job type有明確規定
+    ---> job = {organization: ""} as Job
+    ---> job: Partial<Job> = {organization:""} original type are optional
+usePreviousAndNextPages = (
+  currentPage: Ref<number>,
+  maxPage: Ref<number>
+) ---> 針對currentpage 跟max做type限制為一個Ref物件 type Ref<T>
+defineEmits(["update:modelValue"]); emit("update:modelValue", target.value);
+// @ts-expect-error ---> 下行ERROR可忽略
+
+
+
+
+
+
+
+
 
 
 

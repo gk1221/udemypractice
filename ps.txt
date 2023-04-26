@@ -201,6 +201,11 @@ defineEmits(["update:modelValue"]); emit("update:modelValue", target.value);
 // @ts-expect-error ---> 下行ERROR可忽略
 Object as PropType<Job> --> 指定物件的type 為某一interface Job
 
+getter === ts with computed
+state === ts with ref 
+action === ts with arrow function 
+ts style : 一個變數作為一個function 、 variable ，return 這些結果
+ === js:: export const FILTERED_JOBS_BY_JOB_TYPES = "FILTERED_JOBS_BY_JOB_TYPES";
 
 
 

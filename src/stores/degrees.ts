@@ -1,5 +1,6 @@
 import { ref, computed } from "vue";
 import type { Degree } from "@/api/types";
+
 import { defineStore } from "pinia";
 import getDegrees from "@/api/getDegrees";
 

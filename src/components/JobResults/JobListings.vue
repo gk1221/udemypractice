@@ -33,12 +33,17 @@
 <script lang="ts" setup>
 import { computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
+
 import JobListing from "@/components/JobResults/JobListing.vue";
+import { useDegreesStore } from "@/stores/degrees";
 import { useJobsStore } from "@/stores/jobs";
+
 import usePreviousAndNextPages from "@/composables/usePreviousAndNextPages";
 
 const jobsStore = useJobsStore();
 onMounted(jobsStore.FETCH_JOBS);
+const degreesStore = useDegreesStore();
+onMounted(degreesStore.FETCH_DEGREES);
 
 const FILTERED_JOBS = computed(() => jobsStore.FILTERED_JOBS);
 
@@ -60,39 +65,4 @@ const displayedJobs = computed(() => {
   const lastJobIndex = pageNumber * 10;
   return FILTERED_JOBS.value.slice(firstJobIndex, lastJobIndex);
 });
-
-// export default {
-//   name: "JobListings",
-//   components: {
-//     JobListing,
-//   },
-
-//   computed: {
-//     currentPage() {
-//       return Number.parseInt(this.$route.query.page || "1");
-//     },
-//     previousPage() {
-//
-//     },
-//     ...mapState(useJobsStore, {
-//       FILTERED_JOBS,
-//       nextPage() {
-//
-//       },
-//       displayedJobs() {
-//         const pageString = this.currentPage;
-//         const pageNumber = Number.parseInt(pageString);
-//         const firstJobIndex = (pageNumber - 1) * 10;
-//         const lastJobIndex = pageNumber * 10;
-//         return this.FILTERED_JOBS.slice(firstJobIndex, lastJobIndex);
-//       },
-//     }),
-//   },
-//   async mounted() {
-//     this.FETCH_JOBS();
-//   },
-//   methods: {
-//     ...mapActions(useJobsStore, [FETCH_JOBS]),
-//   },
-// };
 </script>

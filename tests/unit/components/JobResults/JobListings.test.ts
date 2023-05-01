@@ -4,6 +4,8 @@ import { RouterLinkStub } from "@vue/test-utils";
 import { createTestingPinia } from "@pinia/testing";
 import "@testing-library/jest-dom";
 import JobListings from "@/components/JobResults/JobListings.vue";
+
+import { useDegreesStore } from "@/stores/degrees";
 import { useJobsStore } from "@/stores/jobs";
 import { useRoute } from "vue-router";
 
@@ -14,6 +16,7 @@ describe("JobListings", () => {
   const renderJobListings = () => {
     const pinia = createTestingPinia();
     const jobsStore = useJobsStore();
+    const degreesStore = useDegreesStore();
     // @ts-expect-error: Getter is read only
     jobsStore.FILTERED_JOBS = Array(15).fill({});
     render(JobListings, {
@@ -25,7 +28,7 @@ describe("JobListings", () => {
       },
     });
 
-    return { jobsStore };
+    return { jobsStore, degreesStore };
   };
 
   it("fetches jobs", () => {
@@ -34,6 +37,14 @@ describe("JobListings", () => {
     const { jobsStore } = renderJobListings(); //use top useRoute
 
     expect(jobsStore.FETCH_JOBS).toHaveBeenCalledWith();
+  });
+
+  it("fetches degrees", () => {
+    useRouteMock.mockReturnValue({ query: {} });
+
+    const { degreesStore } = renderJobListings(); //use top useRoute
+
+    expect(degreesStore.FETCH_DEGREES).toHaveBeenCalledWith();
   });
 
   it("displays maximum of 10 jobs", async () => {

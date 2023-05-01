@@ -112,4 +112,27 @@ describe("getter", () => {
       });
     });
   });
+
+  describe("INCLUDE_JOB_BY_JOB_DEGREE", () => {
+    describe("when the user has not selected any job degrees", () => {
+      it("includes job", () => {
+        const userStore = useUserStore();
+        userStore.selectedDegrees = [];
+        const store = useJobsStore();
+        const job = createJob({ degree: "Master" });
+
+        const result = store.INCLUDE_JOB_BY_DEGREE(job);
+        expect(result).toBe(true);
+      });
+
+      it("identifiy if job is associated with given job degree", () => {
+        const userStore = useUserStore();
+        userStore.selectedJobTypes = ["Master", "Bachelor"];
+        const store = useJobsStore();
+        const job = createJob({ jobType: "Master" });
+        const result = store.INCLUDE_JOB_BY_JOB_TYPE(job);
+        expect(result).toBe(true);
+      });
+    });
+  });
 });

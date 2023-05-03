@@ -21,19 +21,20 @@ describe("SpotLight", () => {
       ],
     });
   };
+
   it("provides image to parent component", async () => {
-    const spotlight = { img: "Other img" };
+    const spotlight = { img: "Other image" };
     mockSpotlightsResponse(spotlight);
 
     render(SpotLight, {
       slots: {
         default: `<template #default="slotProps">
-                <h1>{{ slotProps.img }}</h1>
-                </template>`,
+          <h1>{{ slotProps.img }}</h1>
+        </template>`,
       },
     });
 
-    const text = await screen.findByText("Other img");
+    const text = await screen.findByText("Other image");
     expect(text).toBeInTheDocument();
   });
 
@@ -44,8 +45,8 @@ describe("SpotLight", () => {
     render(SpotLight, {
       slots: {
         default: `<template #default="slotProps">
-                <h1>{{ slotProps.title }}</h1>
-                </template>`,
+          <h1>{{ slotProps.title }}</h1>
+        </template>`,
       },
     });
 
@@ -54,18 +55,18 @@ describe("SpotLight", () => {
   });
 
   it("provides description to parent component", async () => {
-    const spotlight = { description: "Other description" };
+    const spotlight = { description: "Another description" };
     mockSpotlightsResponse(spotlight);
 
     render(SpotLight, {
       slots: {
         default: `<template #default="slotProps">
-                <h1>{{ slotProps.description }}</h1>
-                </template>`,
+          <h1>{{ slotProps.description }}</h1>
+        </template>`,
       },
     });
 
-    const text = await screen.findByText("Other description");
+    const text = await screen.findByText("Another description");
     expect(text).toBeInTheDocument();
   });
 });

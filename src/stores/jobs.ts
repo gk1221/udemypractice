@@ -53,7 +53,7 @@ export const useJobsStore = defineStore("jobs", {
     },
     [INCLUDE_JOB_BY_DEGREE]: () => (job: Job) => {
       const userStore = useUserStore();
-      if (userStore.selectedJobTypes.length === 0) return true;
+      if (userStore.selectedDegrees.length === 0) return true;
       return userStore.selectedDegrees.includes(job.degree);
     },
 

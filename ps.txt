@@ -207,8 +207,18 @@ action === ts with arrow function
 ts style : 一個變數作為一個function 、 variable ，return 這些結果
  === js:: export const FILTERED_JOBS_BY_JOB_TYPES = "FILTERED_JOBS_BY_JOB_TYPES";
 
+props -- type: [Set<string>, Array<string>] ::可接受的型態
 
-
+checkboxgroup:: 
+const selectedValue = () => { //針對 @change時改變儲存的selectedvalues陣列
+  props.action(selectedValues.value); //呼叫上層props action 並以陣列為變數傳入 --> userStore.add增加選取的結果
+  router.push({ name: "JobResults" }); //結束之後再導向本頁一次
+};
+userStore.$onAction(({ after, name }) => { //pinia store的action被呼叫時的callback function
+  after(() => { //after 之後要做的事情
+    if (name === CLEAR_USER_JOB_FILTER_SELECTIONS) { //func name is 
+      selectedValues.value = [];  //將所選的結果清除
+      ...
 
 
 

@@ -54,7 +54,7 @@
 <script lang="ts" setup>
 import { computed, type PropType } from "vue";
 
-import { Job } from "@/api/types";
+import type { Job } from "@/api/types";
 
 const props = defineProps({
   job: {

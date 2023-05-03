@@ -50,5 +50,6 @@ describe("TheHeadline", () => {
     unmount();
 
     expect(clearInterval).toHaveBeenCalled();
+    vi.unstubAllGlobals();
   });
 });

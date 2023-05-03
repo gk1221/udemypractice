@@ -1,5 +1,6 @@
-import usePreviousAndNextPages from "@/composables/usePreviousAndNextPages";
 import { ref } from "vue";
+
+import usePreviousAndNextPages from "@/composables/usePreviousAndNextPages";
 
 describe("usePreviousAndNextPages", () => {
   it("calculates page before current one", () => {

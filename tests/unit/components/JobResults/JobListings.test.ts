@@ -2,23 +2,23 @@ import type { Mock } from "vitest";
 import { render, screen } from "@testing-library/vue";
 import { RouterLinkStub } from "@vue/test-utils";
 import { createTestingPinia } from "@pinia/testing";
-import "@testing-library/jest-dom";
-import JobListings from "@/components/JobResults/JobListings.vue";
-
-import { useDegreesStore } from "@/stores/degrees";
-import { useJobsStore } from "@/stores/jobs";
 import { useRoute } from "vue-router";
-
 vi.mock("vue-router");
 
+import JobListings from "@/components/JobResults/JobListings.vue";
+import { useDegreesStore } from "@/stores/degrees";
+import { useJobsStore } from "@/stores/jobs";
+
 const useRouteMock = useRoute as Mock;
+
 describe("JobListings", () => {
   const renderJobListings = () => {
     const pinia = createTestingPinia();
     const jobsStore = useJobsStore();
-    const degreesStore = useDegreesStore();
-    // @ts-expect-error: Getter is read only
+    // @ts-expect-error
     jobsStore.FILTERED_JOBS = Array(15).fill({});
+    const degreesStore = useDegreesStore();
+
     render(JobListings, {
       global: {
         plugins: [pinia],
@@ -28,29 +28,30 @@ describe("JobListings", () => {
       },
     });
 
-    return { jobsStore, degreesStore };
+    return { degreesStore, jobsStore };
   };
 
   it("fetches jobs", () => {
     useRouteMock.mockReturnValue({ query: {} });
 
-    const { jobsStore } = renderJobListings(); //use top useRoute
+    const { jobsStore } = renderJobListings();
 
-    expect(jobsStore.FETCH_JOBS).toHaveBeenCalledWith();
+    expect(jobsStore.FETCH_JOBS).toHaveBeenCalled();
   });
 
   it("fetches degrees", () => {
     useRouteMock.mockReturnValue({ query: {} });
 
-    const { degreesStore } = renderJobListings(); //use top useRoute
+    const { degreesStore } = renderJobListings();
 
-    expect(degreesStore.FETCH_DEGREES).toHaveBeenCalledWith();
+    expect(degreesStore.FETCH_DEGREES).toHaveBeenCalled();
   });
 
   it("displays maximum of 10 jobs", async () => {
     useRouteMock.mockReturnValue({ query: { page: "1" } });
+
     const { jobsStore } = renderJobListings();
-    // @ts-expect-error: Getter is read only
+    // @ts-expect-error
     jobsStore.FILTERED_JOBS = Array(15).fill({});
 
     const jobListings = await screen.findAllByRole("listitem");
@@ -59,7 +60,7 @@ describe("JobListings", () => {
 
   describe("when params exclude page number", () => {
     it("displays page number 1", () => {
-      useRouteMock.mockReturnValue({ query: { page: "1" } });
+      useRouteMock.mockReturnValue({ query: {} });
 
       renderJobListings();
 
@@ -69,11 +70,11 @@ describe("JobListings", () => {
 
   describe("when params include page number", () => {
     it("displays page number", () => {
-      useRouteMock.mockReturnValue({ query: { page: "1" } });
+      useRouteMock.mockReturnValue({ query: { page: "3" } });
 
       renderJobListings();
 
-      expect(screen.getByText("Page 1")).toBeInTheDocument();
+      expect(screen.getByText("Page 3")).toBeInTheDocument();
     });
   });
 
@@ -82,7 +83,7 @@ describe("JobListings", () => {
       useRouteMock.mockReturnValue({ query: { page: "1" } });
 
       const { jobsStore } = renderJobListings();
-      // @ts-expect-error: Getter is read only
+      // @ts-expect-error
       jobsStore.FILTERED_JOBS = Array(15).fill({});
 
       await screen.findAllByRole("listitem");
@@ -94,7 +95,7 @@ describe("JobListings", () => {
       useRouteMock.mockReturnValue({ query: { page: "1" } });
 
       const { jobsStore } = renderJobListings();
-      // @ts-expect-error: Getter is read only
+      // @ts-expect-error
       jobsStore.FILTERED_JOBS = Array(15).fill({});
 
       await screen.findAllByRole("listitem");
@@ -108,7 +109,7 @@ describe("JobListings", () => {
       useRouteMock.mockReturnValue({ query: { page: "2" } });
 
       const { jobsStore } = renderJobListings();
-      // @ts-expect-error: Getter is read only
+      // @ts-expect-error
       jobsStore.FILTERED_JOBS = Array(15).fill({});
 
       await screen.findAllByRole("listitem");
@@ -120,7 +121,7 @@ describe("JobListings", () => {
       useRouteMock.mockReturnValue({ query: { page: "2" } });
 
       const { jobsStore } = renderJobListings();
-      // @ts-expect-error: Getter is read only
+      // @ts-expect-error
       jobsStore.FILTERED_JOBS = Array(15).fill({});
 
       await screen.findAllByRole("listitem");

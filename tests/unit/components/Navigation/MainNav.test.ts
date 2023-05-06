@@ -31,7 +31,7 @@ describe("MainNav", () => {
 
   it("displays company name", () => {
     renderMainNav();
-    const companyName = screen.getByText("Bobo Careers");
+    const companyName = screen.getByText("Now Careers");
     expect(companyName).toBeInTheDocument();
   });
 

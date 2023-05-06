@@ -24,7 +24,7 @@ interface SpotLight {
 const spotlights = ref<SpotLight[]>([]);
 
 const getSpotlights = async () => {
-  // @ts-expect-error
+  // @ts-ignore
   const baseUrl = import.meta.env.VITE_APP_API_URL;
   const url = `${baseUrl}/spotlights`;
   const response = await axios.get<SpotLight[]>(url);

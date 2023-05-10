@@ -48,7 +48,6 @@
       </div>
     </router-link>
   </li>
-  【
 </template>
 
 <script lang="ts" setup>

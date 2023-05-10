@@ -15,7 +15,7 @@ describe("JobListings", () => {
   const renderJobListings = () => {
     const pinia = createTestingPinia();
     const jobsStore = useJobsStore();
-    // @ts-ignore
+    // @ts-expect-error
     jobsStore.FILTERED_JOBS = Array(15).fill({});
     const degreesStore = useDegreesStore();
 
@@ -51,7 +51,7 @@ describe("JobListings", () => {
     useRouteMock.mockReturnValue({ query: { page: "1" } });
 
     const { jobsStore } = renderJobListings();
-    //@ts-expect-error
+    // @ts-expect-error
     jobsStore.FILTERED_JOBS = Array(15).fill({});
 
     const jobListings = await screen.findAllByRole("listitem");
@@ -83,7 +83,7 @@ describe("JobListings", () => {
       useRouteMock.mockReturnValue({ query: { page: "1" } });
 
       const { jobsStore } = renderJobListings();
-      //@ts-expect-error
+      // @ts-expect-error
       jobsStore.FILTERED_JOBS = Array(15).fill({});
 
       await screen.findAllByRole("listitem");
@@ -95,7 +95,7 @@ describe("JobListings", () => {
       useRouteMock.mockReturnValue({ query: { page: "1" } });
 
       const { jobsStore } = renderJobListings();
-      //@ts-expect-error
+      // @ts-expect-error
       jobsStore.FILTERED_JOBS = Array(15).fill({});
 
       await screen.findAllByRole("listitem");
@@ -109,7 +109,7 @@ describe("JobListings", () => {
       useRouteMock.mockReturnValue({ query: { page: "2" } });
 
       const { jobsStore } = renderJobListings();
-      //@ts-expect-error
+      // @ts-expect-error
       jobsStore.FILTERED_JOBS = Array(15).fill({});
 
       await screen.findAllByRole("listitem");
@@ -121,7 +121,7 @@ describe("JobListings", () => {
       useRouteMock.mockReturnValue({ query: { page: "2" } });
 
       const { jobsStore } = renderJobListings();
-      //@ts-expect-error
+      // @ts-expect-error
       jobsStore.FILTERED_JOBS = Array(15).fill({});
 
       await screen.findAllByRole("listitem");

@@ -33,7 +33,7 @@ describe("TheSubnav", () => {
 
       const { jobsStore } = renderTheSubnav();
       const numberOfJobs = 16;
-      //@ts-expect-error: Getter is read only
+      // @ts-expect-error: Getter is read only
       jobsStore.FILTERED_JOBS = Array(numberOfJobs).fill({});
 
       const jobCount = await screen.findByText(numberOfJobs);
@@ -47,7 +47,7 @@ describe("TheSubnav", () => {
 
       const { jobsStore } = renderTheSubnav();
       const numberOfJobs = 16;
-      //@ts-expect-error: Getter is read only
+      // @ts-expect-error: Getter is read only
       jobsStore.FILTERED_JOBS = Array(numberOfJobs).fill({});
 
       const jobCount = screen.queryByText(numberOfJobs);

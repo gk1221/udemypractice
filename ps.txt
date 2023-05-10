@@ -223,7 +223,10 @@ userStore.$onAction(({ after, name }) => { //pinia store的action被呼叫時的
 getByRole -> userEvents.clcik
 findByRole -> 
 
-
-
-
+.include() -> include all job
+computed({get{} set{}) 
+1. get : read -> 給v-model作為讀取的來源
+2. set : write -> 當v-model使用資料要進行action
+v-model.lazy 不會馬上rerun
+route.query.role -> 吃get 過來的query字串 role=___
 
